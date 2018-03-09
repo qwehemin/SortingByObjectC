@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
-
+#import <objc/runtime.h>
+#import <objc/message.h>
 @interface ViewController ()
 
 @end
@@ -17,8 +18,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    ((void (*) (id, SEL)) objc_msgSend) (self, @selector(doSomething));
 }
 
+
+- (void)doSomething {
+    NSLog(@"doSomething");
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
